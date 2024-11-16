@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dp7quo5tqsyv1"]
+
+[ext_resource type="Script" path="res://crash_particles.gd" id="1_r6t04"]
+[ext_resource type="Shader" uid="uid://bnyp7ok4t3d3b" path="res://crash.tres" id="2_dt8y2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_la556"]
+render_priority = 0
+shader = ExtResource("2_dt8y2")
+
+[sub_resource type="BoxMesh" id="BoxMesh_ostfp"]
+material = SubResource("ShaderMaterial_la556")
+size = Vector3(0.155, 0.19, 0.15)
+
+[node name="CrashParticles" type="Node3D"]
+script = ExtResource("1_r6t04")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+amount = 20
+lifetime = 0.16
+mesh = SubResource("BoxMesh_ostfp")
+spread = 180.0
+initial_velocity_max = 20.0
+angular_velocity_max = 10.0
+angle_max = 360.0
+scale_amount_min = 0.1
+color = Color(0.831131, 0, 0.463936, 1)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

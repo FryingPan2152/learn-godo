@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://df7xe505miyh4"]
+
+[ext_resource type="Script" path="res://character_body_3d.gd" id="1_ol1m4"]
+[ext_resource type="PackedScene" uid="uid://bx8ee3ncpi7mb" path="res://propeller.tscn" id="2_ul34k"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1vmp8"]
+
+[sub_resource type="Sky" id="Sky_kt73s"]
+
+[sub_resource type="Environment" id="Environment_6hgox"]
+background_mode = 1
+background_color = Color(0.554676, 0.699942, 1, 1)
+sky = SubResource("Sky_kt73s")
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ol1m4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_1vmp8")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]
+
+[node name="Neck" type="Node3D" parent="."]
+
+[node name="HeldObjectPosition" type="Node3D" parent="Neck"]
+
+[node name="Camera3D" type="Camera3D" parent="Neck"]
+environment = SubResource("Environment_6hgox")
+
+[node name="RayCast3D" type="RayCast3D" parent="Neck/Camera3D"]
+target_position = Vector3(0, 0, -5)
+
+[node name="ThirdPersonCameraPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.772514, 1.91339)
+
+[node name="Propeller" parent="." instance=ExtResource("2_ul34k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.845966, 0)
